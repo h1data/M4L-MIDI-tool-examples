@@ -36,7 +36,7 @@ The duration of transformed notes in percent of `Factor` length.
 
 * You can not open Max console from MIDI Transformers or Generators, however, you dan see the print outputs by a Max console window which is opened from regular M4L Instrument, MIDI effect, or Audio effect devices.
 
-* You can obtain the global scale settings by LOM API with `get root_note` and `get scale_name` from path `live_set`.
+* You can obtain the global scale settings by LOM API with `get root_note`, `get scale_name`, and `scale_intervals` from path `live_set`.
 
 ## (Japanese) MIDIトランスフォーマー/ジェネレーターM4L開発メモ 
 
@@ -44,4 +44,4 @@ The duration of transformed notes in percent of `Factor` length.
 
 * MIDIトランスフォーマー/ジェネレーターからMaxコンソールを開くことはできませんが、従来のM4Lデバイスから開いたMaxコンソールでMIDIトランスフォーマー/ジェネレーターがprintオブジェクトなどで出力する内容を確認できます。
 
-* グローバルスケールの設定はLOM APIの `live_set` パスに追加された `get root_note` および `get scale_name` で取得できます。
+* グローバルスケールの設定はLOM APIの `live_set` パスに追加された `get root_note`、`get scale_name`、および`get scale_intervals` で取得できます。
