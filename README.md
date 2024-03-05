@@ -1,5 +1,7 @@
 # Retrigger Transformer
 
+![the image of Retrigger Transformer for Ableton Live 12](retrigger-transformer.png)
+
 ## What is this?
 
 A simple example of a MIDI Transformer which is the new feature of Ableton Live 12 with Max for Live.
