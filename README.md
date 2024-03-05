@@ -16,7 +16,7 @@ Ableton Live 12 / Max 8.6 or later
 
 ## Download
 
-See Releases.
+from Retrigger Transformer.amxd link above or the link [here](https://github.com/h1data/M4L-retrigger-transformer/raw/main/Retrigger%20Transformer.amxd).
 
 ## Parameters
 
@@ -32,9 +32,9 @@ The duration of transformed notes in percent of `Factor` length.
 
 ## Memorandum of M4L development for MIDI Transformer/Generator 
 
-* `dictionary [dict name]` message from outlets of `live.miditool.in` is single symbol (string), however, it becomes a list of symbols after through out prepend objects or message objects like `set $1`.
+* `dictionary [dict name]` message from outlets of `live.miditool.in` is a single symbol (string), however, it becomes a list of symbols after throughout prepend objects or message objects like `set $1`.
 
-* You can not open Max Window from MIDI Transformers or Generators, however, you dan see the print outputs by a Max Window window which is opened from usual M4L Instrument, MIDI effect, or Audio effect devices.
+* You can not open Max Window from MIDI Transformers or Generators, however, you can see the print outputs by a Max Window window which is opened from usual M4L Instrument, MIDI effect, or Audio effect devices.
 
 * You can obtain the global scale settings by LOM API with `get root_note`, `get scale_name`, and `scale_intervals` from path `live_set`.
 
