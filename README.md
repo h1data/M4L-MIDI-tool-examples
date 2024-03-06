@@ -20,9 +20,9 @@ Ableton Live 12 / Max 8.6 or later
 
 1. Download from Retrigger Transformer.amxd link above or the link [here](https://github.com/h1data/M4L-retrigger-transformer/raw/main/Retrigger%20Transformer.amxd).
 
-2. Put amxd file somewhere under your Live user library folder.
+2. Put the amxd file somewhere under your Live user library folder.
 
-3. Now you can select Retrigger Transformer from `User: ` in Transform pane of MIDI clips.
+3. Now you can select Retrigger Transformer from `User:` in Transform pane of MIDI clips.
 
 ## Parameters
 
