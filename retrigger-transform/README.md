@@ -18,7 +18,7 @@ Ableton Live 12 / Max 8.6 or later
 
 ## Usage
 
-1. Download from Retrigger Transformer.amxd link above or the link [here](https://github.com/h1data/M4L-retrigger-transformer/raw/main/Retrigger%20Transformer.amxd).
+1. Download from Retrigger Transformer.amxd link above or the link [here](https://github.com/h1data/M4L-retrigger-transformer/raw/main/retrigger-transform/Retrigger%20Transformer.amxd).
 
 2. Put the amxd file somewhere under your Live user library folder.
 
