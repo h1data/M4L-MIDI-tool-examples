@@ -1,0 +1,3 @@
+*.maxpat              text diff=maxpat
+*.amxd                binary diff=amxd
+*.als                 binary diff=als
