@@ -8,7 +8,7 @@ Examples of Max for Live MIDI tools for Ableton Live 12.
 
 * [Retrigger Transform](retrigger-transform/README.md) : a simple transform tool with js.
 * Scale Viewer: _coming soon..._
-* Separator Transform: _coming soon..._
+* [Separate Transform](separate-transform/README.md)
 
 ## Memorandum of M4L development for MIDI Transformer/Generator 
 
