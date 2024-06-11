@@ -1,5 +1,7 @@
 # Separate Transformer
 
+![the thumbnail of Separate Transformation](separate-transform.png)
+
 ## What is this?
 
 A simple example of a MIDI Transformer which is the new feature of Ableton Live 12 with Max for Live.<br>
