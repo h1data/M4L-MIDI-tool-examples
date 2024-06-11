@@ -8,8 +8,7 @@ Applying transform will fit notes to the scale.
 ## Requirements
 Ableton Live 12 Suite / Max 8.6 or later
 
-## Download
-(link will appear after the commit)
+## [Download](https://github.com/h1data/M4L-MIDI-tool-examples/raw/main/scale-viewer/Scale%20Viewer.amxd)
 
 ## Parameters
 This device has no parameter.

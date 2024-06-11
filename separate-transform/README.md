@@ -10,8 +10,7 @@ The complete device which was made in [Ableton and Max Community Japan workshop]
 ## Requirements
 Ableton Live 12 Suite / Max 8.6 or later
 
-## Download
-(link will appear after the commit)
+## [Download](https://github.com/h1data/M4L-MIDI-tool-examples/raw/main/separate-transform/Separate.amxd)
 
 ## Parameters
 
