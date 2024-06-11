@@ -1,11 +1,12 @@
 /**
  * @description js script for retrigger-transformer Max for Live device
+ * @version 1.0.1
  * @author h1data
  * @since 2024
  */
 autowatch = 1;
 inlets = 1;
-outlets = 1;
+outlets = 2;
 
 var grid = 0;
 var gate = 1.0;
@@ -69,6 +70,7 @@ function dictionary(attr) {
  */
 function setGrid(attr) {
   grid = attr;
+  outlet(1, 'bang')
 }
 
 /**
@@ -77,6 +79,7 @@ function setGrid(attr) {
  */
 function setFactor(attr) {
   factor = attr;
+  outlet(1, 'bang')
 }
 
 /**
@@ -85,4 +88,5 @@ function setFactor(attr) {
  */
 function setGate(attr) {
   gate = attr;
+  outlet(1, 'bang')
 }
