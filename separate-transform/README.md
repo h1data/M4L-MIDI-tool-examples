@@ -8,7 +8,7 @@ A simple example of a MIDI Transformer which is the new feature of Ableton Live 
 The complete device which was made in [Ableton and Max Community Japan workshop](https://amcj-050.peatix.com/).
 
 ## Requirements
-Ableton Live 12 / Max 8.6 or later
+Ableton Live 12 Suite / Max 8.6 or later
 
 ## Download
 (link will appear after the commit)

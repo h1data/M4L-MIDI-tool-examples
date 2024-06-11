@@ -14,7 +14,7 @@ It divides notes by `Factor` note length.
 Built-in `Arpeggiate` Transformer can perform as same as this device by setting `Distance` to 0sd.
 
 ## Dependency Environments
-Ableton Live 12 / Max 8.6 or later
+Ableton Live 12 Suite / Max 8.6 or later
 
 ## Usage
 
