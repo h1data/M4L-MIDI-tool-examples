@@ -1,6 +1,6 @@
-# Retrigger Transformer
+# Retrigger Transformation
 
-![the image of Retrigger Transformer for Ableton Live 12](retrigger-transforme.png)
+![the image of Retrigger Transformer for Ableton Live 12](retrigger-transform.png)
 
 ## What is this?
 
@@ -16,9 +16,7 @@ Built-in `Arpeggiate` Transformer can perform as same as this device by setting 
 ## Dependency Environments
 Ableton Live 12 Suite / Max 8.6 or later
 
-## Usage
-
-1. Download from Retrigger Transformer.amxd link above or the link [here](https://github.com/h1data/M4L-MIDI-tool-examples/raw/main/retrigger-transform/Retrigger.amxd).
+## [Download](https://github.com/h1data/M4L-MIDI-tool-examples/raw/main/retrigger-transform/Retrigger.amxd).
 
 2. Put the amxd file somewhere under your Live user library folder.
 
