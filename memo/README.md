@@ -27,7 +27,7 @@ The note dictionaries from the first outlet of `live.miditool.in` are the same a
 Also, be aware that `velocity` values are float.
 
 The dictionary from the second outlet of `live.miditool.in` is like below.
-``` json
+``` JavaScript
 {
   clip: {
     time_selection_start: 0.5,
@@ -57,28 +57,33 @@ The built-in MIDI Tools seem to ignore if the `grid` was `enabled` but use the `
 
 ## Fitting the Scale
 We have scale context from `live.miditool.in` like below.
-``` json
+``` JavaScript
 {
-  ...
+  // ...
   scale: {
     scale_mode: 1,
     root_note: 0,
     scale_intervals: [0, 2, 4, 5, 7, 9, 11]
   },
-  ...
+  // ...
 }
 ```
 This section discusses how to apply scale to notes with this information.
 
 The easiest calculations for fitting notes to the scale are below.
-$$\text{Let } N = \text{the original note} \\
-R = \text{root\_note} \\
-L = \text{length of scale\_intervals} \\
-\text{Then } O = N \div 12 \\
-S =[( N - R) \div 12]\div L \\
-\text{The scaled note } N' \text{ is} \\
-N' = S\text{th of scale\_interval} + R + 12 \cdot O
+
 $$
+\begin{align}
+\text{Let } N = \text{the original note} \\
+R = \text{root}\underline{}\text{note} \\
+L = \text{length of scale}\underline{}\text{intervals} \\
+\text{Then } O = N \div 12 \\
+S =[(N - R) \div 12]\div L \\
+\text{The scaled note } N' \text{ is} \\
+N' = S\text{th of scale}\underline{}\text{intervals} + R + 12 \cdot O
+\end{align}
+$$
+
 However, this method is not equivalent for the behavior of "Fit to Scale" button in "Pitch and Time" of Live. Most cases live _Major_ scales  such as major
 
 The scaled notes after Fit to Scale are a set of nearest note to scale note and the lowest note.
