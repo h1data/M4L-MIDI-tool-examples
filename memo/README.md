@@ -7,7 +7,7 @@ There are many benefits to using and developing MIDI Transformations/Generators.
 * MIDI Tools can obtain information on notes within user selection much more easily than using Live Object Model (LOM) API.
 * You can use MIDI Tools in the MIDI Clip View without changing to other view.
 * By changing parameters of MIDI Tools, you can see the results of transformation/generation immediately.
-* Classic MIDI Effect devices cannot obtain the length of notes until receiving note off events, but MIDI Tools can obtain the length of whole notes in the MIDI clip.
+* Classic MIDI Effect, which handles notes in real-time, devices cannot obtain the length of notes until receiving note off events. MIDI Tools can obtain the length of whole notes in the MIDI clip.
 * Classic MIDI Effect often have the limit for the number of poly notes. (e.g. Bouncy Notes)<br>
 MIDI Tools would handle 10, 20, or more notes at a time.<br>
 There are further discussions in [Mind The Complexity!](#mind-the-complexity) section.
@@ -15,13 +15,12 @@ There are further discussions in [Mind The Complexity!](#mind-the-complexity) se
 At the moment of June 2024, there are a few disadvantages for MIDI Tools. :(
 * Parameters in MIDI Tools are not able to be automated. 
 * MIDI Tools are not available for Push.
-* MIDI Tools cannot use Node for Max (as known as N4M, the `node.script` object).
+* MIDI Tools cannot use messages from Node for Max (as known as N4M, the `node.script` object) to trigger transform/generation. It is because the process of Max and inner Node.js are not synchronized. `jweb` is as the same.
 
 ## The Basics of MIDI Tool Development
 [The official document](https://docs.cycling74.com/max8/vignettes/live_miditools) discusses the basics of MIDI Tool development.<br>
-It is recommended to read it first before the further information below.
-
-The help patches of `live.miditool.in` and `live.miditool.out` are the fundamental examples of MIDI Tools with pure Max patch.
+It is recommended to read it first before the further information below.<br>
+The help patches of `live.miditool.in` and `live.miditool.out` object are also the fundamental examples of MIDI Tools with pure Max patch.
 
 The note dictionaries from the first outlet of `live.miditool.in` are the same as of Clip class's `get_notes_extended` function in [LOM API](https://docs.cycling74.com/max8/vignettes/live_object_model).<br>
 Also, be aware that `velocity` values are float.
@@ -50,7 +49,7 @@ The dictionary from the second outlet of `live.miditool.in` is like below.
 }
 ```
 As the same as dictionaries in `notes`, the unit of time is beat. (1.0 = quarter note)<br>
-`insert_maker_time` only appears when the user selects outside of any notes.<br>
+`insert_maker_time` only appears when the user selects outside of any notes in MIDI clip.<br>
 Further discussions on `scale` in [Fitting the Scale](#fitting-the-scale) section.
 
 The built-in MIDI Tools seem to ignore if the `grid` was `enabled` but use the `interval` of `grid` whenever the length parameter was set to `Grid`. Thus `enabled` in `grid` might not matter in most cases.
@@ -86,7 +85,9 @@ $$
 
 However, this method is not equivalent for the behavior of "Fit to Scale" button in "Pitch and Time" of Live. Most cases live _Major_ scales  such as major
 
-The scaled notes after Fit to Scale are a set of nearest note to scale note and the lowest note.
+The scaled notes after Fit to Scale are a set of nearest note to scale note and the lowest note like below.
+
+![fit notes to the scale which has notes split into 3 semitones](scale.png)
 
 See [fit2scale.js](https://github.com/h1data/M4L-MIDI-tool-examples/blob/main/scale-viewer/code/fit2scale.js) in Scale Viewer sample device.<br>
 You can easily get the scaled pitch number by `coll` with scale information.
@@ -99,13 +100,13 @@ Dealing with too much process, it might suffer the performance of Live.
 
 Introduces factors which may lead to bad scenarios and those solutions in this section.
 
-### Factor 1: Cause many bangs in a short span
+### Factor 1: cause many bangs in a short span
 
 You can apply transform/generate on changing parameters by sending bang to `live.miditool.in`. Rotating `live.dial` with many steps causes a number of bangs to `live.miditool.in`.
 
 ![rotating live.dial from 0 to 88 causes 85 times](1.png)
 
-### Factor 2: Nests of Loops
+### Factor 2: nests of loops
 
 You might compare a note and other notes in the MIDI clip.
 It is bad idea nests of `array.foreach` or `array.iter` like below.
@@ -121,25 +122,28 @@ A nest of loops must be avoided because it is common there might be dozens of no
 There is the `qlim` object to reduce interval of bang.
 It would reduce the complexity but not solve the root of problems.
 
-### Solution 2-1: Sorting by array.sort to reduce the complexity
+### Solution 2-1: sorting by `array.sort` to reduce the complexity
 
 Sometimes, sorting order of items in arrays may reduce the complexity.
 The complexity of `array.sort` is $O(n\log(n))$, and it is much less than $O(n^2)$. It should be used if the whole complexity is bigger than $O(n\log(n))$ because it is bigger than the typically cases; $O(n)$.
 
-### Solution 2-2: Execute only when dictionaries change
+### Solution 2-2: execute only when dictionaries change
 
 It costs to handle the array of input notes or the dictionary of scale but those are not varied in a short span.
 
-`dict.compare` object can detect the changes of dictionary content like usual `change` object. You can execute heavier procedure only when the input array of notes or the dictionary of scale has been changed.
+`dict.compare` object can detect the changes of dictionary content like usual `change` object. ![a patch to detect if a dictionary changed](3.png)
 
-![a patch ](3.png)
+You can execute heavier procedure only when the input array of notes or the dictionary of scale has been changed.
 
-Off course, `dict.compare' object itself produces some computation costs.
+It can be implemented by `js`, but `dict.compare` would be more efficient because there are no deep comparison method in native methods of JavaScript and you have to iterate every element in objects.<br>
+Off course, `dict.compare` object itself produces some computation costs.
+
+_TODO_: research if we should use `@unordered`
 
 ## Using `js` Object
 * `js` object can receive dictionary messages by the function named `dictionary()`. `dictionary [dict name]` message from outlets of `live.miditool.in` is a single symbol (string), however, it becomes a list of symbols after throughout prepend objects or message objects like `set $1`.
 
-* In your JavaScript source, you can handle dictionaries of `live.miditool.in` like below.
+* In your JavaScript source, you can handle dictionaries of `live.miditool.in` as normal JavaScript objects like below.
 ``` JavaScript
 function dictionary(dictName) {
   var inputDict = JSON.parse(new Dict(dictName).stringify());
@@ -156,7 +160,7 @@ function dictionary(dictName) {
 }
 ```
 
-* When input values from UI parameters, don't send bang directly from UI parameters, but send from js like below.
+* When input values from UI parameters, don't send bang directly from UI parameters, but send from `js` like below.
 
 ![a MIDI tool patch using js](4.png)
 
@@ -192,6 +196,7 @@ See `pictures` page in the help patch of `live.tab` for built-in SVG files.
 
 ### Max 8 Documentation
 * [Max for Live MIDI Tools](https://docs.cycling74.com/max8/vignettes/live_miditools)
+* The help patches of `live.miditool.in` and `live.miditool.out`
 * [LOM - The Live Object Model](https://docs.cycling74.com/max8/vignettes/live_object_model)
 
 ## Other Resources
