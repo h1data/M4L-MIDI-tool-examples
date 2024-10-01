@@ -137,7 +137,7 @@ Arrayの中の要素を並び替えておくことで、計算量を減らせる
 ![dictionaryの変化を検知するパッチ](3.png)
 
 これによって、入力されたノート情報のarrayやスケール情報のdictionaryが変わった時だけ重い処理を実行させることができます。<br>
-`js`でも実装できますが、dictionaryの比較に限ってはJavaScriptのネイティブメソッドで用意されておらず内部の要素を走査する必要があるため、Maxパッチの方が効率が良いと考えられます。<br>
+`js`でも実装できますが、JavaScriptにはオブジェクトを比較するネイティブメソッドがなく内部の要素を走査する必要があるため、`dict.compare`の方が効率が良いと考えられます。<br>
 もちろん、`dict.compare`オブジェクト自体処理は生じるので常に使用すればよいというわけではありません。
 
 _TODO_ `@unordered`を使うべきかどうか調査。
@@ -171,6 +171,22 @@ function dictionary(dictName) {
 ![`js`を使った場合のMIDIツールパッチ例](4.png)
 
 ## エラーメッセージ
+MIDIツールで問題が発生した場合、Live下部のステータスバーにエラーメッセージが表示されます。
+
+### ディクショナリーのノートを時間内に受信できませんでした。ディクショナリーが同期していることを確認して下さい。
+(Did not receive a Note dictionary in time. Make sure that the dictionary is synchronous.)<br>
+これはMIDIツール開発中に最も遭遇するメッセージです。<br>
+`live.miditool.in`からノートメッセージが出力されたにも関わらず、`live.miditool.out`にノートメッセージを受け取っていない場合に表示されます。<br>
+また、`live.miditool.out`に送信するメッセージがdictionary以外だった場合にも表示されます。
+
+### Maxから受信したノートディクショナリーが不完全です: キー"`キーの名前`"が見つかりません。
+(The Note dictionary received from Max was malformed: The key `<key name>` is missing.)<br>
+メッセージのとおり、`live.miditool.out`に出力されたdictionaryに必要な要素がない場合に表示されます。`notes`はトップレベルの要素として必要で、`notes`内のarrayに格納されるdictionaryには、それぞれ`pitch`、`start_time`、および`duration`が必要です。
+
+### ディクショナリーと同期していないノートを受信しました。ディクショナリーが同期していることを確認して下さい。
+(Received a Note dictionary asynchronously. Make sure that the dictionary is synchronous.)<br>
+`live.miditool.in`からの入力が無いにも関わらず`live.miditool.out`にdictionaryメッセージを送信した場合に表示されます。<br>
+`jweb`を利用しようとした際に、`jweb`から出力したメッセージを`live.miditool.out`に出力した場合も表示されます。
 
 ## その他
 
