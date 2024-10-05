@@ -125,7 +125,7 @@ It would reduce the complexity but not solve the root of problems.
 ### Solution 2-1: sorting by `array.sort` to reduce the complexity
 
 Sometimes, sorting order of items in arrays may reduce the complexity.
-The complexity of `array.sort` is $O(n\log(n))$, and it is much less than $O(n^2)$. It should be used if the whole complexity is bigger than $O(n\log(n))$ because it is bigger than the typically cases; $O(n)$.
+The complexity of `array.sort` is $O(n\log(n))$[^1], and it is much less than $O(n^2)$. It should be used if the whole complexity is bigger than $O(n\log(n))$ because it is bigger than the typically cases; $O(n)$.
 
 ### Solution 2-2: execute only when dictionaries change
 
@@ -135,7 +135,7 @@ It costs to handle the array of input notes or the dictionary of scale but those
 
 You can execute heavier procedure only when the input array of notes or the dictionary of scale has been changed.
 
-It can be implemented by `js`, but `dict.compare` would be more efficient because there are no deep comparison method in native methods of JavaScript and you have to iterate every element in objects.<br>
+It can be implemented by `js`, but `dict.compare` would be more efficient because there are no deep comparison method in native methods of JavaScript and you have to iterate every element in objects.[^2]<br>
 Off course, `dict.compare` object itself produces some computation costs.
 
 _TODO_: research if we should use `@unordered`
@@ -202,3 +202,6 @@ See `pictures` page in the help patch of `live.tab` for built-in SVG files.
 ## Other Resources
 
 * [Building a Live 12 MIDI Transformer with Arrays in Live 12](https://www.youtube.com/watch?v=CK_-lEuuPkI)
+
+[^1]: see patch [array-sort-computation.maxpat](examination-patches/array-sort-computation.maxpat)
+[^2]: see patch [dict-change-benchmark.maxpat](examination-patches/dict-change-benchmark.maxpat)

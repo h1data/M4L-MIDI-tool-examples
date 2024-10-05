@@ -125,7 +125,7 @@ MIDIクリップの中で、あるノートの情報と他のノートの情報�
 ### 対処法2-1: array.sortで並び替えることで計算量を抑える
 
 Arrayの中の要素を並び替えておくことで、計算量を減らせる場合があります。<br>
-`array.sort` オブジェクトの計算量は$O(n\log(n))$であり、$O(n^2)$に比べて計算量がかなり少なくなります。
+`array.sort` オブジェクトの計算量は$O(n\log(n))$[^1]であり、$O(n^2)$に比べて計算量がかなり少なくなります。
 最も単純な$O(n)$よりは多くなるため、この方法は全体の計算量が$O(n\log(n))$を上回る場合のみ使うべきです。
 
 ### 対処法2-2: dictionaryが変わった時だけ処理する
@@ -137,7 +137,7 @@ Arrayの中の要素を並び替えておくことで、計算量を減らせる
 ![dictionaryの変化を検知するパッチ](3.png)
 
 これによって、入力されたノート情報のarrayやスケール情報のdictionaryが変わった時だけ重い処理を実行させることができます。<br>
-`js`でも実装できますが、JavaScriptにはオブジェクトを比較するネイティブメソッドがなく内部の要素を走査する必要があるため、`dict.compare`の方が効率が良いと考えられます。<br>
+`js`でも実装できますが、JavaScriptにはオブジェクトを比較するネイティブメソッドがなく内部の要素を走査する必要があるため、`dict.compare`の方が効率が良いと考えられます。[^2]<br>
 もちろん、`dict.compare`オブジェクト自体処理は生じるので常に使用すればよいというわけではありません。
 
 _TODO_ `@unordered`を使うべきかどうか調査。
@@ -207,3 +207,6 @@ MIDIツールで問題が発生した場合、Live下部のステータスバー
 ## その他の資料
 
 * [Building a Live 12 MIDI Transformer with Arrays in Live 12](https://www.youtube.com/watch?v=CK_-lEuuPkI)
+
+[^1]: パッチ[array-sort-computation.maxpat](examination-patches/array-sort-computation.maxpat)を参照
+[^2]: パッチ[dict-change-benchmark.maxpat](examination-patches/dict-change-benchmark.maxpat)を参照
