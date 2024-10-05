@@ -145,6 +145,7 @@ _TODO_: research if we should use `@unordered`
 
 * In your JavaScript source, you can handle dictionaries of `live.miditool.in` as normal JavaScript objects like below.
 ``` JavaScript
+var outputDict = new Dict();
 function dictionary(dictName) {
   var inputDict = JSON.parse(new Dict(dictName).stringify());
   var outputArray = [];
@@ -154,9 +155,8 @@ function dictionary(dictName) {
       // pitch: ..., start_time: ..., duration: ...
     } );
   }
-  var outputDict = new Dict();
   outputDict.parse(JSON.stringify({notes: outputArray}));
-  outlet(0, outputDict);
+  outlet(0, 'dictionary', outputDict.name);
 }
 ```
 

@@ -150,6 +150,7 @@ _TODO_ `@unordered`を使うべきかどうか調査。
 * JavaScriptのソースでは、`live.miditool.in`からのdictionaryを以下の様に通常のJavScriptオブジェクトとして扱うことができます。
 
 ``` JavaScript
+var outputDict = new Dict();
 function dictionary(dictName) {
   var inputDict = JSON.parse(new Dict(dictName).stringify());
   var outputArray = [];
@@ -159,9 +160,8 @@ function dictionary(dictName) {
       // pitch: ..., start_time: ..., duration: ...
     } );
   }
-  var outputDict = new Dict();
   outputDict.parse(JSON.stringify({notes: outputArray}));
-  outlet(0, outputDict);
+  outlet(0, 'dictionary', outputDict.name);
 }
 ```
 
