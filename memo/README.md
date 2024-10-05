@@ -203,5 +203,5 @@ See `pictures` page in the help patch of `live.tab` for built-in SVG files.
 
 * [Building a Live 12 MIDI Transformer with Arrays in Live 12](https://www.youtube.com/watch?v=CK_-lEuuPkI)
 
-[^1]: see patch [array-sort-computation.maxpat](examination-patches/array-sort-computation.maxpat)
-[^2]: see patch [dict-change-benchmark.maxpat](examination-patches/dict-change-benchmark.maxpat)
+[^1]: see patch [array-sort-computation.maxpat](https://github.com/h1data/M4L-MIDI-tool-examples/blob/main/memo/patches/array-sort-computation.maxpat)
+[^2]: see patch [dict-change-benchmark.maxpat](https://github.com/h1data/M4L-MIDI-tool-examples/blob/main/memo/patches/dict-change-benchmark.maxpat)

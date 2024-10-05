@@ -208,5 +208,5 @@ MIDIツールで問題が発生した場合、Live下部のステータスバー
 
 * [Building a Live 12 MIDI Transformer with Arrays in Live 12](https://www.youtube.com/watch?v=CK_-lEuuPkI)
 
-[^1]: パッチ[array-sort-computation.maxpat](examination-patches/array-sort-computation.maxpat)を参照
-[^2]: パッチ[dict-change-benchmark.maxpat](examination-patches/dict-change-benchmark.maxpat)を参照
+[^1]: パッチ[array-sort-computation.maxpat](https://github.com/h1data/M4L-MIDI-tool-examples/blob/main/memo/patches/array-sort-computation.maxpat)を参照
+[^2]: パッチ[dict-change-benchmark.maxpat](https://github.com/h1data/M4L-MIDI-tool-examples/blob/main/memo/patches/dict-change-benchmark.maxpat)を参照
