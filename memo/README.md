@@ -40,7 +40,8 @@ The dictionary from the second outlet of `live.miditool.in` is like below.
   scale:  {
     scale_mode: 1,
     root_note: 0,
-    scale_intervals: [0, 2, 4, 5, 7, 9, 11]
+    scale_intervals: [0, 2, 4, 5, 7, 9, 11],
+    scale_name: 'Major'
   },
   grid: {
     interval: 0.25,
@@ -50,9 +51,15 @@ The dictionary from the second outlet of `live.miditool.in` is like below.
 ```
 As the same as dictionaries in `notes`, the unit of time is beat. (1.0 = quarter note)<br>
 `insert_maker_time` only appears when the user selects outside of any notes in MIDI clip.<br>
-Further discussions on `scale` in [Fitting the Scale](#fitting-the-scale) section.
+Further discussions on `scale` in [Fitting the Scale](#fitting-the-scale) section.<br>
+`scale_name` was added since [Live 12.0.5](https://www.ableton.com/release-notes/live-12/#Live12.0.5PublicReleaseNotes(WIP)-MaxforLive).
 
 The built-in MIDI Tools seem to ignore if the `grid` was `enabled` but use the `interval` of `grid` whenever the length parameter was set to `Grid`. Thus `enabled` in `grid` might not matter in most cases.
+
+`live.miditool.in` has the 3rd outlet since Max 8.6.3.<br>
+It have not documented yet in 8.6.5 that the 3rd outlet outputs `pitch_range` messages when dragging key area in piano roll.
+
+![the 3rd outlet of live.miditool.in outputs pitch range when dragging key area in piano roll](3rd-outlet.png)
 
 ## Fitting the Scale
 We have scale context from `live.miditool.in` like below.
@@ -186,6 +193,8 @@ The author has encountered this message when trying to output from messages from
 
 * You can use the picture `scale.svg` in Max for scale-switching button. Other than the scale pic, there are new 60 SVG files added in Max 8.6. <br>
 See `pictures` page in the help patch of `live.tab` for built-in SVG files.
+
+* You can obtain the 'scale_awareness' color since [Max 8.6.5](https://cycling74.com/releases/max/8.6.5).
 
 # References
 

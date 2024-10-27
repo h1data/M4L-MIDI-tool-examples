@@ -39,7 +39,8 @@ MIDI生成／変形ツールを開発することには多くの利点があり�
   scale:  {
     scale_mode: 1,
     root_note: 0,
-    scale_intervals: [0, 2, 4, 5, 7, 9, 11]
+    scale_intervals: [0, 2, 4, 5, 7, 9, 11],
+    scale_name: 'Major'
   },
   grid: {
     interval: 0.25,
@@ -49,9 +50,15 @@ MIDI生成／変形ツールを開発することには多くの利点があり�
 ```
 `notes`と同様に、時間の単位は拍（1.0=四分音符）になります。<br>
 `insert_marker_time` はMIDIクリップ画面でノート以外を選択した場合のみ出現します。<br>
-`scale` については[スケールに合わせる](#スケールに合わせる)の章で詳しく取り上げます。
+`scale` については[スケールに合わせる](#スケールに合わせる)の章で詳しく取り上げます。<br>
+`scale_name` は[Live 12.0.5](https://www.ableton.com/release-notes/live-12/#Live12.0.5PublicReleaseNotes(WIP)-MaxforLive)以降で取得できるようになりました。
 
 標準のMIDIツールでは、`grid`の`enabled`（有効/無効）の値に関わらず、長さのパラメーターが `Grid` に設定されると`grid` の `interval` の長さを使用するようです。`grid` の `enabled` はほとんどの場合無視できると言えます。
+
+Max 8.6.3以降で、`live.miditool.in`は第3アウトレットが追加されました。<br>
+まだ8.6.5のドキュメントにも記載されていませんが、ピアノロールの鍵盤部分をドラッグすると、第3アウトレットから`pitch_range`メッセージが出力されます。
+
+![ピアノロールの鍵盤部分をドラッグして、live.miditool.inの第3アウトレットからピッチレンジが出力される様子](3rd-outlet.png)
 
 ## スケールに合わせる
 `live.miditool.in` から取得するスケール情報は以下のとおりです。
@@ -197,6 +204,8 @@ MIDIツールで問題が発生した場合、Live下部のステータスバー
 
 * スケール設定の切り替えスイッチ用に、画像ファイル `scale.svg` がMaxに内蔵されています。それ以外にもMax 8.6では60もの内蔵SVGファイルが追加されています。<br>
 内蔵SVGファイルは`live.tab`オブジェクトの`pictures`ページから確認できます。
+
+* [Max 8.6.5](https://cycling74.com/releases/max/8.6.5) 以降で、色設定 `scale_awareness` が取得できるようになりました。
 
 # 参考資料
 ## 公式ドキュメント
