@@ -1,3 +1,8 @@
+/**
+ * @description jsui script for Scale Viewer Max for Live MIDI Transformation Tool
+ * @version 1.0.2
+ * @since 2024
+ */
 mgraphics.init();
 mgraphics.relative_coords = 0;
 mgraphics.autofill = 0;
@@ -20,8 +25,6 @@ var BLACK_NOTES = [1, 3, 6, 8, 10];
 var rootNote = 0;
 var blackNotes = [];
 var scaleNotes = [];
-var fgColor = [1.00, 0.68, 0.34, 1.00];
-var bgColor = [0.24, 0.25, 0.29, 1.00];
 
 /**
  * input scale dictionary
@@ -47,9 +50,9 @@ function paint() {
   for (var i=0; i<12; i++) {
     for (var j=0; j<13; j++) {
       if (scaleNotes[i] == j) {
-        mgraphics.set_source_rgba(fgColor);
+        mgraphics.set_source_rgba(max.getcolor('live_lcd_control_fg'));
       } else if (blackNotes.indexOf(i%12) == -1 || blackNotes.indexOf(j) == -1) {
-        mgraphics.set_source_rgba(bgColor);
+        mgraphics.set_source_rgba(max.getcolor('live_lcd_frame'));
       } else {
         continue;
       }
@@ -60,35 +63,19 @@ function paint() {
 }
 
 /**
- * set fg color from the output of live.colors
- * @param {number} r 
- * @param {number} g 
- * @param {number} b 
- * @param {number} a
+ * input note number and scaled note number to be transformed
+ * @param {number} note 
+ * @param {number} scaledNote 
  */
-function lcd_control_fg(r, g, b, a) {
-  fgColor = [r, g, b, a];
-  mgraphics.redraw();
-}
-
-/**
- * set bg color from the output of live.colors
- * @param {number} r 
- * @param {number} g 
- * @param {number} b 
- * @param {number} a
- */
-function lcd_frame(r, g, b, a) {
-  bgColor = [r, g, b, a];
-  mgraphics.redraw();
-}
-
 function setScale(note, scaledNote) {
   if (note >= rootNote && note < (12 + rootNote)) {
     scaleNotes[note - rootNote] = scaledNote - rootNote;
   }
 }
 
+/**
+ * receive a bang to paint
+ */
 function bang() {
   mgraphics.redraw();
 }
